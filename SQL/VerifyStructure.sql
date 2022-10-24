@@ -1,3 +1,9 @@
+-- Verify all tables have been created
+
+SHOW Tables;
+
+-- Verify the columns in each table are correct
+
 SHOW COLUMNS IN Film;
 
 SHOW COLUMNS IN People;
