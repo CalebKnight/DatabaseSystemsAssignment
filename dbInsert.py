@@ -1,11 +1,12 @@
 import mysql.connector
 import random
 
+
 mydb = mysql.connector.connect(
     host="localhost",
-    user="root",
-    passwd="root",
-    database="default_db"
+    user="me",
+    passwd="myUserPassword",
+    database="dswork"
     
 )
 print("Connected to database")
@@ -183,10 +184,12 @@ for winner in winners:
     people_id = cur.execute("SELECT people_id FROM People WHERE first_name = %s AND last_name = %s", (winner.person.first_name, winner.person.last_name))
     people_id = cur.fetchone()[0]
     # print(people_id)
+    cur.fetchall()
     cur.reset()
     award_id = cur.execute("SELECT award_id FROM Award WHERE name = %s AND year = %s", (winner.award.name, winner.award.year))
     award_id = cur.fetchone()[0]
     # print(award_id)
+    cur.fetchall()
     cur.reset()
     film_id = cur.execute("SELECT film_id FROM Film WHERE title = %s AND year = %s", (winner.film.title, winner.film.year))
     try:
@@ -195,6 +198,7 @@ for winner in winners:
         cur.execute("INSERT INTO Award_Winner(people_id, award_id, film_id) VALUES (%s, %s, %s)", (people_id, award_id, film_id))
     except:
         pass
+    cur.fetchall()
     cur.reset()
     
 mydb.commit()
@@ -214,6 +218,7 @@ mydb.commit()
 for scheduled_film in scheduled_films:
     cur.execute("SELECT film_id FROM Film WHERE title = %s AND year = %s", (scheduled_film.film.title, scheduled_film.film.year))
     film_id = cur.fetchone()[0]
+    cur.fetchall()
     cur.reset()
     query = "SELECT festival_id FROM Venue WHERE year = %s"
     
@@ -223,10 +228,10 @@ for scheduled_film in scheduled_films:
         cur.execute("INSERT INTO Scheduled_Film (film_id, festival_id) VALUES (%s, %s)", (film_id, venue_id))
     except:
         pass
-    
+    cur.fetchall()
     cur.reset()
     
-
+cur.fetchall()
 mydb.commit()
 cur.close()
 
