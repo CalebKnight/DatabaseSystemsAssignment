@@ -194,7 +194,11 @@ for winner in winners:
     film_id = cur.execute("SELECT film_id FROM Film WHERE title = %s AND year = %s", (winner.film.title, winner.film.year))
     try:
         film_id = cur.fetchone()[0]
-        cur.reset()
+    except:
+        pass
+    cur.reset()
+    cur.fetchall()
+    try:
         cur.execute("INSERT INTO Award_Winner(people_id, award_id, film_id) VALUES (%s, %s, %s)", (people_id, award_id, film_id))
     except:
         pass
