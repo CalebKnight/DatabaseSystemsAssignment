@@ -1,3 +1,5 @@
+-- Delete tables that currently exist in correct order
+
 DROP TABLE IF EXISTS Scheduled_Film CASCADE;
 
 DROP TABLE IF EXISTS Award_Winner CASCADE;
