@@ -112,9 +112,9 @@ class DbManager:
         festival_id = self.cur.fetchone()[0]
         return festival_id
 
-    def insertScheduleOfFilm(self, schedule):
+    def insertScheduleOfFilm(self, film_id, festival_id):
         sql = "INSERT INTO Scheduled_Film (film_id, festival_id) VALUES (%s, %s)"
-        val = (schedule.film_id, schedule.festival_id)
+        val = (film_id, festival_id)
         self.cur.execute(sql, val)
         self.mydb.commit()
         # print(self.cur.rowcount, "record inserted.")
