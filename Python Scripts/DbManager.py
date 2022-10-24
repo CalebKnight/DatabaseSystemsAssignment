@@ -35,9 +35,9 @@ class DbManager:
     def connect(self):
         self.mydb = mysql.connector.connect(
             host="localhost",
-            user="root",
-            password="root",
-            database="default_db"
+            user="me",
+            password="myUserPassword",
+            database="dswork"
         )
         print("Connected to database")
         self.cur = self.mydb.cursor(buffered=True)
